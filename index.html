@@ -91,7 +91,21 @@
         };
 
         let list = document.getElementById("songList");
+
         let player = document.getElementById("player");
+
+        function playSong() {
+            if (player.currentSrc) {
+                player.play();
+            } else {
+                alert("Select a song first!");
+            }
+        }
+
+        function pauseSong() {
+            player.pause();
+        }
+
 
         if (songs[language]) {
 
