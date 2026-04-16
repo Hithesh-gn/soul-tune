@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Soul Tune</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- LOGIN CHECK -->
+    <script>
+        let user = localStorage.getItem("user");
+        let lang = localStorage.getItem("language");
+
+        if (!user) {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <header>
+        <h1>Soul Tune 🎵</h1>
+        <h3 id="welcome"></h3>
+    </header>
+
+    <section class="hero">
+        <h2>Billions of songs in one app</h2>
+        <p>Experience unlimited music anytime, anywhere.</p>
+    </section>
+
+    <section>
+        <h2>WELCOME TO SOUL TUNE</h2>
+        <p>What music do you like?</p>
+        <h3 id="langDisplay"></h3>
+    </section>
+
+
+
+
+
+    <!-- ✅ FIXED PLAYLIST SECTION -->
+    <section>
+        <h2>Playlist</h2>
+
+        <div id="songList"></div>
+
+        <h3>Now Playing 🎧</h3>
+
+        <audio id="player"></audio>
+
+        <div class="player-controls">
+            <button onclick="playSong()">▶️</button>
+            <button onclick="pauseSong()">⏸️</button>
+        </div>
+    </section>
+
+    <footer>
+        <h3>THANK YOU</h3>
+    </footer>
+
+    <!-- ✅ MAIN SCRIPT (KEEP AT BOTTOM) -->
+    <script>
+
+        let userName = localStorage.getItem("user");
+        let language = localStorage.getItem("language");
+
+        document.getElementById("welcome").innerText = "Welcome " + userName;
+        document.getElementById("langDisplay").innerText = "Language: " + language;
+
+        // Local songs
+        let songs = {
+            Kannada: [
+                { name: "song1", file: "songs/song1.mp3" },
+                { name: "kuhu kuhu kogile", file: "songs/kuhu kuhu kogile.mp3" }
+
+            ],
+
+            Hindi: [
+                { name: "kesariya", file: "songs/kesariya.mp3" },
+            ],
+
+            Malayalam: [
+                { name: "kanmani", file: "songs/kanmani.mp3" },
+            ],
+            Telugu: [
+                { name: "endhayya saami", file: "songs/endhayya saami.mp3" },
+            ],
+            Punjabi: [
+                { name: "tauba tauba", file: "songs/tauba tauba.mp3" },
+            ],
+        };
+
+        let list = document.getElementById("songList");
+        let player = document.getElementById("player");
+
+        if (songs[language]) {
+
+            songs[language].forEach(song => {
+
+                let btn = document.createElement("button");
+                btn.innerText = song.name;
+
+                btn.onclick = function () {
+                    player.src = song.file;
+                    player.play();
+                };
+
+                list.appendChild(btn);
+                list.appendChild(document.createElement("br"));
+            });
+
+        } else {
+            list.innerHTML = "No songs available";
+        }
+
+    </script>
+</body>
+
+</html>
